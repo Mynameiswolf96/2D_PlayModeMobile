@@ -1,11 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Features.Shed.Upgrade;
 
-internal class TransportModel
+namespace Game.Transport
 {
-    public readonly float Speed;
+    internal class TransportModel : IUpgradable
+    {
+        private readonly float _defaultSpeed;
+        private readonly float _defaultJumpHeight;
+        private readonly float _defaultFirePower = 1f;
 
-    public TransportModel(float speed) =>
-        Speed = speed;
+        public readonly TransportType Type;
+
+        public float Speed { get; set; }
+        public float JumpHeight { get; set; }
+        public float FirePower { get; set; }
+
+
+        public TransportModel(float speed, float jumpHeight, TransportType type)
+        {
+            _defaultSpeed = speed;
+            _defaultJumpHeight = jumpHeight;
+            Speed = speed;
+            JumpHeight = jumpHeight;
+            Type = type;
+            FirePower = _defaultFirePower;
+        }
+
+        public void Restore()
+        {
+            Speed = _defaultSpeed;
+            JumpHeight = _defaultJumpHeight;
+            FirePower = _defaultFirePower;
+        }
+            
+    }
 }
